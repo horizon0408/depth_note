@@ -21,5 +21,6 @@ Notes and summaries on depth estimation research papers
 * 4D cost volume
     + concat left and right SPP feature maps across each disparity level. (H * W * D * feature_size)
 * Stacked hour-glass architecture for cost volume regularization
+    + repeat top-down/bottom-up processing with intermediate supervision
     
 ## Multi-view depth estimation<a name="mvs"></a>
