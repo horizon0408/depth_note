@@ -10,6 +10,8 @@ Notes and summaries on stereo research papers
 ## Monocular depth estimation<a name="monocular"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera</a>
 
+<a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
+
 
 ## Stereo depth estimation<a name="stereo"></a>
 
