@@ -19,8 +19,21 @@ Notes and summaries on depth estimation research papers
 * Spatial Pyramid Pooling(SPP) Module
     + aims to incorporate context information by learning the relationship between an object and its sub-region.
 * 4D cost volume
-    + concat left and right SPP feature maps across each disparity level. (H * W * D * feature_size)
+    + concat left and right SPP feature maps across each disparity level (H, W, D, feature_size)
 * Stacked hour-glass architecture for cost volume regularization
     + repeat top-down/bottom-up processing with intermediate supervision
+    
+ <a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a>
+ * Construct cost volume by group-wise correlation
+    + full correlation(DispNetC) lose information because only produces a single-channel correlation map for each disparity level
+    + Divide channel into multiple groups, split features along channel dimension
+    + left ith left group is cross-correlated with ith right group over all disparity levels(compute inner product as DispNetC)
+    + packed correlations into matching cost volume (D/4, H/4, W/4, N_g)
+
+* Modified the stacked 3D hourglass networks 
+    + add extra output module and the extra loss lead to better features at lower layers
+    + remove residual connection between output modules.
+    + connections within each hourglass are added 1 * 1 * 1 3D conv
+    
     
 ## Multi-view depth estimation<a name="mvs"></a>
