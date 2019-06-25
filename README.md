@@ -48,6 +48,9 @@ Notes and summaries on depth estimation research papers
     + firstly train the model that MCUA is applied on the matching cost computation in PSMNet (2D-CNNs after SPP??)
     + secondly train EMCUA where a residual module is added at the end of MCUA
     
+ <a href = "https://arxiv.org/pdf/1904.06587.pdf">GA-Net: Guided Aggregation Net for End-to-end Stereo Matching(CVPR 2019)</a>
+ 
+ <a href = "https://arxiv.org/pdf/1905.09265.pdf">Bridging Stereo Matching and Optical Flow via Spatiotemporal Correspondence(CVPR 2019)</a>
     
 ## Multi-view depth estimation<a name="mvs"></a>
 TBC
