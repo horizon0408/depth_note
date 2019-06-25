@@ -1,4 +1,4 @@
-# Notes and summaries on depth estimation research papers
+# Depth estimation research papers
 
 # Table of Contents
 1. [Monocular depth estimation](#monocular)
