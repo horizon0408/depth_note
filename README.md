@@ -8,5 +8,11 @@ Notes and summaries on stereo research papers
 
 
 ## Monocular depth estimation<a name="monocular"></a>
+<a href="https://arxiv.org/pdf/1901.02571.pdf" target="_blank">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera</a>
+
+
 ## Stereo depth estimation<a name="stereo"></a>
+
+
+
 ## Multi-view depth estimation<a name="mvs"></a>
