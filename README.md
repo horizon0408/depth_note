@@ -1,9 +1,12 @@
 # stereo_note
 Notes and summaries on stereo research papers
 
-[TOC] Monocular depth estimation
+# Table of Contents
+1. [Monocular depth estimation]
+2. [Stereo depth estimation]
+3. [Multi-view depth estimation]
 
-[TOC] Stereo depth estimation
 
-
-[TOC] Multi-view depth estimation
+## Monocular depth estimation
+## Stereo depth estimation
+## Multi-view depth estimation
