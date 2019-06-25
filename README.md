@@ -35,5 +35,19 @@ Notes and summaries on depth estimation research papers
     + remove residual connection between output modules.
     + connections within each hourglass are added 1 * 1 * 1 3D conv
     
+ <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Nie_Multi-Level_Context_Ultra-Aggregation_for_Stereo_Matching_CVPR_2019_paper.pdf">Multi-Level Context Ultra-Aggregation for Stereo Matching(CVPR 2019)</a>
+ * Formulate two aggregation schemes(<a href = "https://arxiv.org/pdf/1608.06993.pdf">DenseNet</a>, <a href = "https://arxiv.org/pdf/1707.06484.pdf">DLA</a>) with Higher Order RNNS.
+    + DenseNets cannoy merge features across scales and resolutions.
+    + the fusion in DLA only refers to the intra-level combination.
+ * Intra-level combination (divide into two groups according to the size of feature maps(1/2 or 1/4), fuse features in each group)
+    + use 1 * 1 conv to match with each other, integrated by element-wise summation and pre-activated
+ * Inter-level combination
+    + an independent child module, firstly avg pooling to reduce the size by half(1/4), same architecture with the 1st group(1/2)
+    + obtain large receptive fields at shallow stages
+ * EMCUA
+    + firstly train the model that MCUA is applied on the matching cost computation in PSMNet (2D-CNNs after SPP??)
+    + secondly train EMCUA where a residual module is added at the end of MCUA
+    
     
 ## Multi-view depth estimation<a name="mvs"></a>
+TBC
