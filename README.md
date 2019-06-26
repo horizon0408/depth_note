@@ -60,6 +60,15 @@ paper notes, keep updating......
     + compare to traditional <a href="http://wwwpub.zih.tu-dresden.de/~cvweb/publications/papers/2012/FastCost-VolumeFiltering.pdf">cost filter</a>, it aggregates with a K×K×3 weight matrix in a K×K local region for each pixel.
     
  <a href = "https://arxiv.org/pdf/1905.09265.pdf">Bridging Stereo Matching and Optical Flow via Spatiotemporal Correspondence(CVPR 2019)</a>
-    
+ * learn joint representations for tasks that are highly-related unsupervisedly with given stereo videos
+    + share a single network for both flow estimation and stereo matching
+ * forward-backward consistency check to find occluded regions for optical flow
+ * 2-Warp consistency loss
+    + warp image twice by both optical flow and stereo disparity.
+ 
+ 
+ 
+ 
+ 
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href = "https://arxiv.org/pdf/1904.08103.pdf">Multi-Scale Geometric Consistency Guided Multi-View Stereo(CVPR 2019)</a>
