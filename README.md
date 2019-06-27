@@ -15,6 +15,10 @@ paper notes, keep updating......
 
 ## Stereo depth estimation<a name="stereo"></a>
 
+<a href = "http://vision.middlebury.edu/stereo/taxonomy-IJCV.pdf">A Taxonomy and Evaluation of Dense Two-Frame
+Stereo Correspondence Algorithms(2002)</a>
+* Traditional stereo methods generally perform 4 steps: matching cost computation; cost aggregation; disparity computation / optimization; disparity refinement.
+
 <a href = "https://github.com/JiaRenChang/PSMNet">PSMNet: Pyramid Stereo Matching Network(CVPR 2018)</a>
 * Spatial Pyramid Pooling(<a href = "https://arxiv.org/pdf/1406.4729.pdf">SPP</a>) Module
     + aims to incorporate context information by learning the relationship between an object and its sub-region.
