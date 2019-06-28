@@ -8,7 +8,7 @@ paper notes, keep updating......
 
 
 ## Monocular depth estimation<a name="monocular"></a>
-<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera</a>
+<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>
 
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
 
@@ -26,6 +26,9 @@ Stereo Correspondence Algorithms(2002)</a>
     + concat left and right SPP feature maps across each disparity level (H, W, D, F)
 * Stacked hour-glass architecture for cost volume regularization
     + repeat top-down/bottom-up processing with intermediate supervision
+    
+Implemention details notes:
+I trained ScenesFlow with 10 epochs with batch size as 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours.
     
  <a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a>
  * Construct cost volume by group-wise correlation
