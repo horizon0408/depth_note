@@ -28,7 +28,7 @@ Stereo Correspondence Algorithms(2002)</a>
     + repeat top-down/bottom-up processing with intermediate supervision
     
 Implemention details notes:
-I trained ScenesFlow with 10 epochs with batch size as 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours.
+I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours; tried finetune with KITTI2015 300 epochs with batch size = 4, there are 160 training pairs so each epochs have 40 iters.
     
  <a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a>
  * Construct cost volume by group-wise correlation
@@ -82,6 +82,9 @@ I trained ScenesFlow with 10 epochs with batch size as 4(A pair of images in siz
     + use error maps as parts of input of refinement network rather than as loss function.
  * <a href="https://arxiv.org/pdf/1804.06242.pdf">Vortex Pooling</a> better than SPP
  
+ <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Poggi_Guided_Stereo_Matching_CVPR_2019_paper.pdf">Guided Stereo Matching</a>
+ * use external sparse(< 5%) depth cues
+ * feature enhancement 
  
  
 ## Multi-view depth estimation<a name="mvs"></a>
