@@ -73,7 +73,7 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  * 2-Warp consistency loss
     + warp image twice by both optical flow and stereo disparity.
  
- <a href="https://arxiv.org/pdf/1904.02251.pdf">StereoDRNet: Dilated Residual Stereo Net</a>
+ <a href="https://arxiv.org/pdf/1904.02251.pdf">StereoDRNet: Dilated Residual Stereo Net (CVPR 2019)</a>
  * 3D Dilated Convolution in Cost Filtering
     + combine information fetched from varing receptive fields
  * Disparity refinement
@@ -82,7 +82,7 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
     + use error maps as parts of input of refinement network rather than as loss function.
  * <a href="https://arxiv.org/pdf/1804.06242.pdf">Vortex Pooling</a> better than SPP
  
- <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Poggi_Guided_Stereo_Matching_CVPR_2019_paper.pdf">Guided Stereo Matching</a>
+ <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Poggi_Guided_Stereo_Matching_CVPR_2019_paper.pdf">Guided Stereo Matching (CVPR 2019)</a>
  * use external sparse(< 5%) depth cues
     + to simulate the cues, randomly sample pixels from the ground truth disparity maps for both training and testing
  * feature enhancement 
