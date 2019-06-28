@@ -84,8 +84,11 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  
  <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Poggi_Guided_Stereo_Matching_CVPR_2019_paper.pdf">Guided Stereo Matching</a>
  * use external sparse(< 5%) depth cues
+    + to simulate the cues, randomly sample pixels from the ground truth disparity maps for both training and testing
  * feature enhancement 
- 
+    + given a disparity value k, enhance the k-th channel output of a correlation layer or the k-th slice of a 4D volume.
+    + to avoid replace a lot zero values, use a Gaussian function.
+   
  
 ## Multi-view depth estimation<a name="mvs"></a>
 TBC
