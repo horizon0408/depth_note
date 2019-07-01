@@ -28,7 +28,7 @@ Stereo Correspondence Algorithms(2002)</a>
     + repeat top-down/bottom-up processing with intermediate supervision
     
 Implemention details notes:
-I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours; tried finetune with KITTI2015 300 epochs with batch size = 4, there are 160 training pairs so each epochs have 40 iters.
+I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours; tried finetune with KITTI2015 300 epochs with batch size = 4, there are 160 training pairs so each epochs have 40 iters, which takes 4.44 hours.
     
  <a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a>
  * Construct cost volume by group-wise correlation
