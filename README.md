@@ -96,10 +96,10 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
    
  
 ## Multi-view depth estimation<a name="mvs"></a>
-<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>
+<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
 * use D-Net to learn the depth probability volume (DPV)
     + pre-define dmin, dmax and neighbour window size to learn DPV
-    + warps the features from neighbour frames to the reference frame
+    + warps the features from neighbour frames to the reference frame and compute a cost volume (L1).
     + the confidence maps can be obtained from DPV
 * Apply Bayesian filter to integrate DPV over time
     + warp current DPV to 'predict' the DPV at t+1
