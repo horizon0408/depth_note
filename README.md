@@ -24,19 +24,23 @@ Stereo Correspondence Algorithms(2002)</a>
     + concat left and right SPP feature maps across each disparity level (H, W, D, F)
 * Stacked hour-glass architecture for cost volume regularization
     + repeat top-down/bottom-up processing with intermediate supervision
+
+<details>
+ <summary><a href = "https://arxiv.org/pdf/1712.01039.pdf">Learning for Disparity Estimation through Feature Constancy (CVPR 2018)</a> </summary>
     
-<a href = "https://arxiv.org/pdf/1712.01039.pdf">Learning for Disparity Estimation through Feature Constancy (CVPR 2018)</a>
 *  iResNet (iterative residual prediction network), incorporate all steps into a single network
 *  use feature consistency to identify the correctness of the initial disparity and then refine
 *  refined disparity map considered as a new initial map，repeated until the improvement is small
 *  implemented in CAFFE (https://github.com/leonzfa/iResNet)
-
+</details>
     
 Implemention details notes:
 I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours; tried finetune with KITTI2015 300 epochs with batch size = 4, there are 160 training pairs so each epochs have 40 iters, which takes 4.44 hours.
+ 
+<details>
+<summary><a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a></summary>
     
- <a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a>
- * Construct cost volume by group-wise correlation
+* Construct cost volume by group-wise correlation
     + full correlation(DispNetC) lose information because only produces a single-channel correlation map for each disparity level
     + Divide channel into multiple groups, split features along channel dimension
     + left ith left group is cross-correlated with ith right group over all disparity levels(compute inner product as DispNetC)
@@ -46,10 +50,13 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
     + add extra output module and the extra loss lead to better features at lower layers
     + remove residual connection between output modules.
     + connections within each hourglass are added 1×1×1 3D conv
-    
- <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Nie_Multi-Level_Context_Ultra-Aggregation_for_Stereo_Matching_CVPR_2019_paper.pdf">Multi-Level Context Ultra-Aggregation for Stereo Matching(CVPR 2019)</a>
+ </details>
+   
+ <details>
+ <summary><a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Nie_Multi-Level_Context_Ultra-Aggregation_for_Stereo_Matching_CVPR_2019_paper.pdf">Multi-Level Context Ultra-Aggregation for Stereo Matching(CVPR 2019)</a> </summary>
+  
  * Formulate two aggregation schemes(<a href = "https://arxiv.org/pdf/1608.06993.pdf">DenseNet</a>, <a href = "https://arxiv.org/pdf/1707.06484.pdf">DLA</a>) with Higher Order RNNS.
-    + DenseNets cannoy merge features across scales and resolutions.
+    + DenseNets cannot merge features across scales and resolutions.
     + the fusion in DLA only refers to the intra-level combination.
  * Intra-level combination (divide into two groups according to the size of feature maps(1/2 or 1/4), fuse features in each group)
     + use 1×1 conv to match with each other, integrated by element-wise summation and pre-activated
@@ -59,8 +66,11 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  * EMCUA
     + firstly train the model that MCUA is applied on the matching cost computation in PSMNet (2D-CNNs after SPP??)
     + secondly train EMCUA where a residual module is added at the end of MCUA
+ </details>
+ 
+<details>
+<summary> <a href = "https://arxiv.org/pdf/1904.06587.pdf">GA-Net: Guided Aggregation Net for End-to-end Stereo Matching(CVPR 2019)</a></summary>
     
- <a href = "https://arxiv.org/pdf/1904.06587.pdf">GA-Net: Guided Aggregation Net for End-to-end Stereo Matching(CVPR 2019)</a>
  * Semi-global guided aggregation(SGA) layer
     + aims to solve occluded regions or large textureless/reflective regions
     + differentiable approximation of semi-global matching (<a href="https://core.ac.uk/download/pdf/11134866.pdf">SGM</a>), which aggregates matching cost iteratively in four directions.
@@ -70,15 +80,21 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  * Local guided aggregation(LGA) layer
     + aims to refine the thin structures and object edges which may be blured by down-sampling and up-sampling easily
     + compare to traditional <a href="http://wwwpub.zih.tu-dresden.de/~cvweb/publications/papers/2012/FastCost-VolumeFiltering.pdf">cost filter</a>, it aggregates with a K×K×3 weight matrix in a K×K local region for each pixel.
+</details>
+
+<details>
+<summary> <a href = "https://arxiv.org/pdf/1905.09265.pdf">Bridging Stereo Matching and Optical Flow via Spatiotemporal Correspondence(CVPR 2019)</a> </summary>
     
- <a href = "https://arxiv.org/pdf/1905.09265.pdf">Bridging Stereo Matching and Optical Flow via Spatiotemporal Correspondence(CVPR 2019)</a>
  * learn joint representations for tasks that are highly-related unsupervisedly with given stereo videos
     + share a single network for both flow estimation and stereo matching
  * forward-backward consistency check to find occluded regions for optical flow
  * 2-Warp consistency loss
     + warp image twice by both optical flow and stereo disparity.
- 
- <a href="https://arxiv.org/pdf/1904.02251.pdf">StereoDRNet: Dilated Residual Stereo Net (CVPR 2019)</a>
+</details>
+
+<details>
+<summary> <a href="https://arxiv.org/pdf/1904.02251.pdf">StereoDRNet: Dilated Residual Stereo Net (CVPR 2019)</a></summary>
+
  * 3D Dilated Convolution in Cost Filtering
     + combine information fetched from varing receptive fields
  * Disparity refinement
@@ -86,6 +102,7 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
     + warp right disparity D_r to left view via left disparity D_l (geometric consistency)
     + use error maps as parts of input of refinement network rather than as loss function.
  * <a href="https://arxiv.org/pdf/1804.06242.pdf">Vortex Pooling</a> better than SPP
+ </details>
  
  <a href = "http://openaccess.thecvf.com/content_CVPR_2019/papers/Poggi_Guided_Stereo_Matching_CVPR_2019_paper.pdf">Guided Stereo Matching (CVPR 2019)</a>
  * use external sparse(< 5%) depth cues
