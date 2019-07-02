@@ -8,8 +8,6 @@ paper notes, keep updating......
 
 
 ## Monocular depth estimation<a name="monocular"></a>
-<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>
-
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
 
 
@@ -98,5 +96,13 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
    
  
 ## Multi-view depth estimation<a name="mvs"></a>
-TBC
-
+<a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>
+* use D-Net to learn the depth probability volume (DPV)
+    + pre-define dmin, dmax and neighbour window size to learn DPV
+    + warps the features from neighbour frames to the reference frame
+    + the confidence maps can be obtained from DPV
+* Apply Bayesian filter to integrate DPV over time
+    + warp current DPV to 'predict' the DPV at t+1
+    + to prevent wrong information propagate but also encourage correct information to be integrated, use K-Net to change the weight of 'prediction' adaptively
+* R-Net
+    + upsample and refine the DPV to original resolution (1/4 before)
