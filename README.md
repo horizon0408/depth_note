@@ -17,6 +17,20 @@ paper notes, keep updating......
 Stereo Correspondence Algorithms(2002)</a>
 * Traditional stereo methods generally perform 4 steps: matching cost computation; cost aggregation; disparity computation / optimization; disparity refinement.
 
+<a href = "https://arxiv.org/pdf/1703.04309.pdf">GC-Net: End-to-End Learning of Geometry and Context for Deep Stereo Regression (ICCV 2017)</a>
+* cost volume
+    + not simply concatenate left and right features, but concat across each disparity level (H, W, maxD+1, F)
+    + use distance metric restricts the network to only learn relative representations between features, and cannot carry absolute feature representations through to cost volume.
+* use 3D convolutions to regularize the cost volume over height×width×disparity dimensions, get final regularized cost volume with size H×W×D.
+* Differentiable soft argmin
+    + traditional argmin's results are discrete, no sub-pixel estimates and not differentiable.
+    + convert cost volume to probability volume, firstly take the negative value and then use softmax
+    + take the sum of each disparity, weighted by its normalized probability
+    + rely on network’s regularization to produce probability distribution which is predominantly unimodal
+    
+
+
+
 <a href = "https://github.com/JiaRenChang/PSMNet">PSMNet: Pyramid Stereo Matching Network(CVPR 2018)</a>
 * Spatial Pyramid Pooling(<a href = "https://arxiv.org/pdf/1406.4729.pdf">SPP</a>) Module
     + aims to incorporate context information by learning the relationship between an object and its sub-region.
