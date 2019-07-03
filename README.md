@@ -124,7 +124,7 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  * feature enhancement 
     + given a disparity value k, enhance the k-th channel output of a correlation layer or the k-th slice of a 4D volume.
     + to avoid replace a lot zero values, use a Gaussian function.
-    + the Gaussian modulation applied after concatenating L/R features
+    + the Gaussian modulation applied after concatenating L/R features (2F, D, H, W)
    
  
 ## Multi-view depth estimation<a name="mvs"></a>
