@@ -103,7 +103,8 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
     + share a single network for both flow estimation and stereo matching
  * forward-backward consistency check to find occluded regions for optical flow
  * 2-Warp consistency loss
-    + warp image twice by both optical flow and stereo disparity.
+    + warp image twice by both optical flow and stereo disparity
+    + training in unsupervised setting, no gt optical flow, disparity map and camera poses provided.
 </details>
 
 <details>
