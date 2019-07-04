@@ -39,7 +39,7 @@ Stereo Correspondence Algorithms(2002)</a>
 * Stacked hour-glass architecture for cost volume regularization
     + repeat top-down/bottom-up processing with intermediate supervision
     
-Implemention details notes:
+Code details notes:
 I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x512 consumed about 4GB GPU memory.), the training takes 24 hours; tried finetune with KITTI2015 300 epochs with batch size = 4, there are 160 training pairs so each epochs have 40 iters, which takes 4.44 hours.
 
 <details>
@@ -105,6 +105,10 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
  * 2-Warp consistency loss
     + warp image twice by both optical flow and stereo disparity
     + training in unsupervised setting, no gt optical flow, disparity map and camera poses provided.
+    
+Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_LIBRARY_PATH="/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH" export PATH="/usr/local/cuda-9.2/bin:$PATH" it works.
+ 
+ 
 </details>
 
 <details>
