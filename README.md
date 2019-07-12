@@ -51,6 +51,28 @@ I trained ScenesFlow 10 epochs with batch size = 4(A pair of images in size 256x
 *  implemented in CAFFE (https://github.com/leonzfa/iResNet)
 </details>
 
+
+<details>
+<summary><a href = "https://arxiv.org/pdf/1803.06641.pdf">Zoom and Learn: Generalizing Deep Stereo Matching to Novel Domains (CVPR 2018)</a> </summary>
+Proposed a self-adaptation method to generalize a pre-trained deep stereo model to novel scenes 
+
+* Scale diversity
+    + passing an up-sampled stereo pair then down-sampling the result lead to more high-frequency details, but the performance won't keep improving with the increase of the up-sample rate.
+    + up-sampling enable matching with sub-pixel accuracy, more details are taken into consideration
+    + meanwhile, finer-scale input means smaller receptive filed, which leads to lack of non-local info
+* <a href = "https://arxiv.org/pdf/1604.07948.pdf">graph laplacian regularization</a>
+    + an adaptive metric as smoothness term
+* iterative regularization
+    + given pretrained model and a set combine both synthetic dataset w/ GT and real pairs wo/ GT.
+    + create 'gt' for real pairs by zooming, minimize the difference between current prediction and fine-grain prediction.
+* daily scenes from smartphones
+    + 1900 pairs for training, 320 for validation, 320 for testing. collected resolution is 768×768.
+    + the disparity is small
+</details>
+    
+
+    
+
 <details>
 <summary><a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a></summary>
     
@@ -131,6 +153,7 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + to avoid replace a lot zero values, use a Gaussian function.
     + the Gaussian modulation applied after concatenating L/R features (2F, D, H, W)
    
+
  
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
