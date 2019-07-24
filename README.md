@@ -168,7 +168,9 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + upsample and refine the DPV to original resolution (1/4 before)
 
 ## others
-<a href = "http://www.cvlibs.net/publications/Janai2018ECCV.pdf"> Unsupervised Learning of Multi-Frame Optical Flow with Occlusions (ECCV 2018)</a>
+<details>
+<summary> <a href = "http://www.cvlibs.net/publications/Janai2018ECCV.pdf"> Unsupervised Learning of Multi-Frame Optical Flow with Occlusions (ECCV 2018)</a> </summary>
+    
 * three-frame temporal window
     + consider both past and future frames
 * occlusion estimation
@@ -181,4 +183,5 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * Two flow decoders
     + encourage constant velocity as a soft constraint
     + Under the constant velocity assumption, the future and past flow should be equal in length but differ in direction.
+</details>
     
