@@ -166,3 +166,19 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + to prevent wrong information propagate but also encourage correct information to be integrated, use K-Net to change the weight of 'prediction' adaptively
 * R-Net
     + upsample and refine the DPV to original resolution (1/4 before)
+
+## others
+<a href = "http://www.cvlibs.net/publications/Janai2018ECCV.pdf"> Unsupervised Learning of Multi-Frame Optical Flow with Occlusions (ECCV 2018)</a>
+* three-frame temporal window
+    + consider both past and future frames
+* occlusion estimation
+    + consider three occlusion cases: visible in all frame, only occlusion in past frame, only occlusion is future frame
+    + enforce the norm of occlusion variable for each pixel to be 1 with softmax function
+    + use it to weight the contribution of future and past estimates
+* Two separate cost volumes
+    + one for past and one for future, to detect occlusions
+    + stack two cost volume as the input for all separate decoders
+* Two flow decoders
+    + encourage constant velocity as a soft constraint
+    + Under the constant velocity assumption, the future and past flow should be equal in length but differ in direction.
+    
