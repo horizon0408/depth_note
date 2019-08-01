@@ -153,6 +153,26 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + to avoid replace a lot zero values, use a Gaussian function.
     + the Gaussian modulation applied after concatenating L/R features (2F, D, H, W)
    
+ <a href = "https://arxiv.org/pdf/1810.05424.pdf">Real-time self-adaptive deep stereo (CVPR)</a> <a href='https://github.com/CVLAB-Unibo/Real-time-self-adaptive-deep-stereo'>[code]</a>
+ * a fast modular architecture
+    + at the lowest resoltion (F6), forward features from left to right into correlation layer(DispNetC here), decoder D6 get disparity map at lowest resolution.
+    + upsample D6 to level 5, used for warping right features to left before computing correlation.
+    + then the decoder D_k is to refine and correct the up-scaled disparity prediction
+    + the correlation scores computed between original left and aligned right features guides the refinement process.
+    
+ * modular adaption
+    + model is always in training mode and continuously fine-tuning to the sensed environment
+    + grouping layers at the same resolution into a single module
+    + optimize module independently, compute loss with prediction y_i and excute shorter backprop only across Module i
+    
+ * Reward/punishment selection (sample)
+    + when deploying, need to sample a portion (from [1, p]) of the network to optimize for each incoming pair
+    + create a histogram with p bins and apply softmax to obtain probability distribution to sample
+    + To update the histogram, compute noisy expected value L_exp according to previous loss(L_{t-1}, L_{t-2})
+    + change the value of histogram according to L_{exp} - L_t (>0 means effect)
+    + the loss is based on photometric consistency loss, combination of L1 and SSIM
+    
+ 
 
  
 ## Multi-view depth estimation<a name="mvs"></a>
