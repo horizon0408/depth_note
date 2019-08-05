@@ -88,9 +88,8 @@ Proposed a self-adaptation method to generalize a pre-trained deep stereo model 
     + a textured is projected into the scene with an IR(红外) projector, and cameras are augmented to perceive IR and visible spectra.
     
 * photometric loss is poor
-    + brighter pixels are closer
+    + brighter pixels are closer(passive stereo won't suffer as the intensity and disparity won't have correlation)
     + brighter pixels are likely to have bigger residual than dark pixels.
-    + passive stereo won't suffer as the intensity and disparity won't have correlation.
     
 * Weighted Local Contrast Normalization(LCN)
     + remove the dependency between intensity and disparity, give better residual in occluded region
