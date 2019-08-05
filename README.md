@@ -90,7 +90,7 @@ Proposed a self-adaptation method to generalize a pre-trained deep stereo model 
 * photometric loss is poor
     + brighter pixels are closer
     + brighter pixels are likely to have bigger residual than dark pixels.
-    + bias the network towards closeup scenes
+    + passive stereo won't suffer as the intensity and disparity won't have correlation.
     
 * Weighted Local Contrast Normalization(LCN)
     + remove the dependency between intensity and disparity, give better residual in occluded region
