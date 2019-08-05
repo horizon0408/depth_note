@@ -70,9 +70,47 @@ Proposed a self-adaptation method to generalize a pre-trained deep stereo model 
     + the disparity is small
 </details>
     
-
+<details>
+<summary><a href = "https://arxiv.org/pdf/1807.08865.pdf">StereoNet: Guided Hierarchical Refinement for Real-Time Edge-Aware Depth Prediction (ECCV 2018)</a></summary>
     
+* low resolution cost volume
+    + low resolution(1/8 or 1/16) lead to bigger receptive filed and compact feature vectors
+    + most time is spent with higher resolutions while most performance gain from lower resolutions.
+* edge-aware hierarchical refinement
+    + upsample the disparity bilinearly and concatenate with color
+    + output is a 1D residual to be added to previous coarse prediction
+* real-time(60 fps)
+</details>
 
+<details>
+<summary><a href="https://arxiv.org/pdf/1807.06009.pdf">ActiveStereoNet: End-to-End Self-Supervised Learning for Active Stereo Systems (ECCV 2018)</a></summary>
+* active stereo
+    + a textured is projected into the scene with an IR(红外) projector, and cameras are augmented to perceive IR and visible spectra.
+    
+* photometric loss is poor
+    + brighter pixels are closer
+    + brighter pixels are likely to have bigger residual than dark pixels.
+    + bias the network towards closeup scenes
+    
+* Weighted Local Contrast Normalization(LCN)
+    + remove the dependency between intensity and disparity, give better residual in occluded region
+    + compute local mean and std in 9×9 patch to normalize the intensity
+    + before re-weight, suffer in low texture regions(have small std that can amplify residual)
+    + re-weight using std estimated on the reference image
+
+* adaptive support weight cost aggregation
+    + traditional adaptive support sceheme, effective but slow
+    + only integrate in training with 32×32 windlow
+    
+* invalidation network
+    + left-right check occlusion mask with enforcing regularization on the number of valid pixel
+    + invalidation network also produce mask, which make inference faster
+    
+* dataset
+    + real dataset: collected from Intel Realsense D435 camera(10000/100 train/test), the camera have IR light source.
+    + synthetic dataset: rendered by Blender(10000/1200)
+</details>
+    
 <details>
 <summary><a href = "https://arxiv.org/pdf/1903.04025.pdf">GwcNet: Group-wise Correlation Stereo Network(CVPR 2019)</a></summary>
     
