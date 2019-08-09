@@ -10,7 +10,24 @@ paper notes, keep updating......
 ## Monocular depth estimation<a name="monocular"></a>
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
 
-
+<a href="https://128.84.21.199/pdf/1908.03127.pdf">Enhancing self-supervised monocular depth estimation with traditional visual odometry (3DV 2019)</a>
+* VO to obtained sparse 3D points
+    + reproject 3D points onto both L/R camera planes to get sparse disparity map.
+    + deploy two VO methods for training that exploit stereo and monocular sequences respectively
+    + use ORB-SLAM2 for stereo VO (correct scale), Zenuity's pipeline for monocular VO(need scale recovery)
+    
+* sparsity-invariant autoencoder (also check paper <a href="https://arxiv.org/pdf/1708.06500.pdf">Sparsity Invariant CNNs</a>)
+    + sparse disparity map (SD) to denser priors (DD) for further estimation  
+    + final prediction d is a sum of DD'(from skip module) and D(from depth estimator)
+  
+* self-supervised loss
+    + use stereo image only for training (symmetric scheme), the inference use monocular input
+    + apperance matching loss,  disparity smoothness loss, left-right consistency loss
+    + occlusion loss: minimize the sum of all disparities
+    + inner loss: enforce DD to be consistent with SD (use L1 here)
+    + outer loss: to preserve the info from VO, enforce final prediction d to be consistent with SD
+    
+    
 ## Stereo depth estimation<a name="stereo"></a>
 
 <a href = "http://vision.middlebury.edu/stereo/taxonomy-IJCV.pdf">A Taxonomy and Evaluation of Dense Two-Frame
