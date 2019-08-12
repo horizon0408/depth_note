@@ -10,7 +10,7 @@ paper notes, keep updating......
 ## Monocular depth estimation<a name="monocular"></a>
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
 
-<a href="https://128.84.21.199/pdf/1908.03127.pdf">Enhancing self-supervised monocular depth estimation with traditional visual odometry (3DV 2019)</a>
+<a href="https://arxiv.org/pdf/1908.03127.pdf">Enhancing self-supervised monocular depth estimation with traditional visual odometry (3DV 2019)</a>
 * VO to obtained sparse 3D points
     + reproject 3D points onto both L/R camera planes to get sparse disparity map.
     + deploy two VO methods for training that exploit stereo and monocular sequences respectively
