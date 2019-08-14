@@ -34,6 +34,13 @@ paper notes, keep updating......
 Stereo Correspondence Algorithms(2002)</a>
 * Traditional stereo methods generally perform 4 steps: matching cost computation; cost aggregation; disparity computation / optimization; disparity refinement.
 
+<a href = "https://arxiv.org/pdf/1512.02134.pdf">(DispNet)A Large Dataset to Train Convolutional Networks for Disparity, Optical Flow, and Scene Flow Estimation</a>
+* follow the archietecture of <a href="https://arxiv.org/pdf/1504.06852.pdf">FlowNet</a>
+* DispNetCorr
+    + two images processed separately to conv2 and resulting features are correlated horizontally(1D).
+    + compute the dot product, lead to single-channel correlation map for each disparity level
+    
+
 <a href = "https://arxiv.org/pdf/1703.04309.pdf">GC-Net: End-to-End Learning of Geometry and Context for Deep Stereo Regression (ICCV 2017)</a>
 * cost volume
     + not simply concatenate left and right features, but concat across each disparity level (H, W, maxD+1, F)
