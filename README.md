@@ -286,3 +286,26 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 </details>
 
 <a href="https://arxiv.org/pdf/1910.12361.pdf">SENSE: a Shared Encoder Network for Scene-flow Estimation </a>
+* shared encoder for four related tasks: optical flow/ disparity from stereo/ occlusion/ semantic segementation
+    + inputsL two stereo images pairs (no camera pose needed)
+    + build on top pf PWC-Net, encoder extracts features at different hierarchies
+        + original PWC-Net encoder only suit for optical flow due to small capacity
+        + reduce pyramid level from 6 to 5 , reduce numbers of parameters and can borrow 5-level ResNet-like encoder
+    + decoder for disparity
+        + Pyramid Pooling Module(PPM) to aggregate learned features
+        + add a hourglass, take twice up-sampled disparity, feature map of the 1st image, warped feature map of 2nd image to predict residual disparity that is added to the upsampled disparity
+    + decoder for segmentation, use <a href="https://arxiv.org/pdf/1807.10221.pdf">UPerNet</a>
+    + occlusion
+        + add sibling branches to optical flow/disparity decoders to do pixel-wise binary classification
+        
+    
+* semi-supervised
+    + use pre-trained models trained on other annotated data to 'supervise' network when GT is missing
+    + distillation loss
+        + pseudo GT for occlusion provided by pre-trained model on synthetic data
+        
+    + self-supervision loss
+        + corresponding pixels have similar pixel values and semantic classes
+        + critical for improvement in regions w/o GT (like sky)
+        
+        
