@@ -1,5 +1,5 @@
 # Depth estimation research papers
-paper notes, keep updating......
+12.2.2019: add iccv19 to-read list
 
 # Table of Contents
 1. [Monocular depth estimation](#monocular)
@@ -26,8 +26,20 @@ paper notes, keep updating......
     + occlusion loss: minimize the sum of all disparities
     + inner loss: enforce DD to be consistent with SD (use L1 here)
     + outer loss: to preserve the info from VO, enforce final prediction d to be consistent with SD
-    
-    
+
+<a href="https://research.dshin.org/iccv19/multi-layer-depth/">3D Scene Reconstruction with Multi-layer Depth and Epipolar Transformers (ICCV 2019)</a>
+
+
+<a href="https://arxiv.org/pdf/1908.09521.pdf">Object-Driven Multi-Layer Scene Decomposition From a Single Image (ICCV 2019)</a>
+
+<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Spatial_Correspondence_With_Generative_Adversarial_Network_Learning_Depth_From_Monocular_ICCV_2019_paper.pdf">Spatial Correspondence with Generative Adversarial Network:
+Learning Depth from Monocular Videos (ICCV 2019)</a>
+
+
+<a href="https://arxiv.org/pdf/1909.09051.pdf">Self-Supervised Monocular Depth Hints</a>
+
+<a href="https://arxiv.org/pdf/1806.01260.pdf">Digging Into Self-Supervised Monocular Depth Estimation</a>
+
 ## Stereo depth estimation<a name="stereo"></a>
 
 <a href = "http://vision.middlebury.edu/stereo/taxonomy-IJCV.pdf">A Taxonomy and Evaluation of Dense Two-Frame
@@ -233,8 +245,10 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + change the value of histogram according to L_{exp} - L_t (>0 means effect)
     + the loss is based on photometric consistency loss, combination of L1 and SSIM
     
- 
-
+  <a href = "https://arxiv.org/pdf/1909.05845.pdf">DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch(ICCV 19)</a> 
+  
+  <a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> 
+  
  
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
@@ -247,6 +261,11 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + to prevent wrong information propagate but also encourage correct information to be integrated, use K-Net to change the weight of 'prediction' adaptively
 * R-Net
     + upsample and refine the DPV to original resolution (1/4 before)
+
+
+<a href="https://arxiv.org/pdf/1908.04422.pdf">Point-Based Multi-View Stereo Network</a>
+
+<a href="https://arxiv.org/pdf/1908.03706.pdf">Exploiting temporal consistency for real-time video depth estimation</a>
 
 ## others
 <details>
@@ -265,4 +284,5 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + encourage constant velocity as a soft constraint
     + Under the constant velocity assumption, the future and past flow should be equal in length but differ in direction.
 </details>
-    
+
+<a href="https://arxiv.org/pdf/1910.12361.pdf">SENSE: a Shared Encoder Network for Scene-flow Estimation </a>
