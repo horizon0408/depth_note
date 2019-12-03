@@ -248,6 +248,21 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
   <a href = "https://arxiv.org/pdf/1909.05845.pdf">DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch(ICCV 19)</a> 
   
   <a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> 
+    * pyramid cost volumes for both semantic and spatial info 
+        + Unlike PSMNet use single cost volume with multiscale features, it construct multilevel cost volumes directly (btw the figure for spatial cost volume via spatial pooling is clear) (However, should lead to much higher complexity?)
+        + semantic cost volume follows <a href="https://arxiv.org/pdf/1612.01105.pdf">PSPNet</a>
+            + single, upsample feature maps to the same size and concatenate
+    * 3D multi-cost aggregation with hourglass and 3D feature fusion module(FFM)
+        + for each spatial cost volume, firstly a hourglass then upsampled for following fusion
+        + fuse 4D spatial cost volumes from low to high level in a recursive way 
+        + FFM employ <a href="https://arxiv.org/pdf/1709.01507.pdf">SE-block structure</a>
+    * boundary loss
+        + disparity discontinuity point is always on the semantic boundaries
+        + compute intensity gradient for GT segmentation labels and predicted disparity (align edges)
+    * two-step training, train the segementation subnet firstly and then joint training the whole
+        + For Scene Flow, have object-level segmentation GT, transform to segmentation labels
+        + For KITTI2015/12, the semantic segmentation first trained with KITTI15 (have GT for left images)
+    
   
  
 ## Multi-view depth estimation<a name="mvs"></a>
@@ -285,7 +300,9 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + Under the constant velocity assumption, the future and past flow should be equal in length but differ in direction.
 </details>
 
-<a href="https://arxiv.org/pdf/1910.12361.pdf">SENSE: a Shared Encoder Network for Scene-flow Estimation </a>
+<details>
+<summary><a href="https://arxiv.org/pdf/1910.12361.pdf">SENSE: a Shared Encoder Network for Scene-flow Estimation </a></summary>
+    
 * shared encoder for 4 related tasks: optical flow/ disparity from stereo/ occlusion/ semantic segementation
     + inputsL two stereo images pairs (no camera pose needed)
     + build on top pf PWC-Net, encoder extracts features at different hierarchies, reduce pyramid level from 6 to 5 
@@ -300,7 +317,6 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + self-supervision loss
         + corresponding pixels have photometric consistency and semantic consistency(similar posterior probability)
         + add regularization terms for occlusion study
-        + critical for improvement in regions w/o GT (like sky)
 * rigidity-based warped disparity refinement
     + select pixel as static by removing semantic level vehicle/pedestrian/cyclist/sky
     + estimate rigid flow induced by camera motion
@@ -308,7 +324,7 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + estimate warped second frame rigid disparity
         + use estimated transformation to get warped disparity of 2nd frame from 1st frame
         + then use the estimated forward flow to compute warped disparity of 2nd frame (suspect Eq.18 in Appendix B??)
-        
+</details>
         
     
     
