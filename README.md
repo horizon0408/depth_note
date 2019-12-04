@@ -247,29 +247,45 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     
   <a href = "https://arxiv.org/pdf/1909.05845.pdf">DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch(ICCV 19)</a> 
   
-  <a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> 
-    * pyramid cost volumes for both semantic and spatial info 
-        + Unlike PSMNet use single cost volume with multiscale features, it construct multilevel cost volumes directly (btw the figure for spatial cost volume via spatial pooling is clear) (However, should lead to much higher complexity?)
-        + semantic cost volume follows <a href="https://arxiv.org/pdf/1612.01105.pdf">PSPNet</a>
-            + single, upsample feature maps to the same size and concatenate
-    * 3D multi-cost aggregation with hourglass and 3D feature fusion module(FFM)
-        + for each spatial cost volume, firstly a hourglass then upsampled for following fusion
-        + fuse 4D spatial cost volumes from low to high level in a recursive way 
-        + FFM employ <a href="https://arxiv.org/pdf/1709.01507.pdf">SE-block structure</a>
-    * boundary loss
-        + disparity discontinuity point is always on the semantic boundaries
-        + compute intensity gradient for GT segmentation labels and predicted disparity (align edges)
-    * two-step training, train the segementation subnet firstly and then joint training the whole
-        + For Scene Flow, have object-level segmentation GT, transform to segmentation labels
-        + For KITTI2015/12, the semantic segmentation first trained with KITTI15 (have GT for left images)
+<a href = "https://arxiv.org/pdf/1807.11699.pdf">SegStereo: Exploiting Semantic Information for Disparity Estimation (ECCV18)</a> 
+* Model Specification
+    + shallow part of ResNet-50 model to extract image features
+    + PSPNet-50 as segmentation net
+    + The weights in the shallow part and segmentation network are fixed when training
+    + Disparity encoder behind hybrid volume contains 12 residual blocks
+* given shared representation, use segmentation network to compute semantic features for left/right respectively
+* concatenate both transformed left features(to preserve details), correlated features, left semantic features as hybrid volume
+* warped semantic consistency via semantic loss regularization
+    + warp right semantic features to left based on predicted disparity map and use left segmentation GT to guide
+    + propagates softmax loss back to disparity branch by warping
+* framework is appliable for both supervised/unsupervised training
+    + the unsupervised loss introduce a mask indicator to avoid outlier, setting a threshold for resulting photometric diff
+    + chabonier function for spatial smoothness penalty 
+
+
+<a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> 
+* pyramid cost volumes for both semantic and spatial info 
+    + Unlike PSMNet use single cost volume with multiscale features, it construct multilevel cost volumes directly (btw the figure for spatial cost volume via spatial pooling is clear) (However, should lead to much higher complexity?)
+    + semantic cost volume follows <a href="https://arxiv.org/pdf/1612.01105.pdf">PSPNet</a>
+        + single, upsample feature maps to the same size and concatenate
+* 3D multi-cost aggregation with hourglass and 3D feature fusion module(FFM)
+    + for each spatial cost volume, firstly a hourglass then upsampled for following fusion
+    + fuse 4D spatial cost volumes from low to high level in a recursive way 
+    + FFM employ <a href="https://arxiv.org/pdf/1709.01507.pdf">SE-block structure</a>
+* boundary loss
+    + disparity discontinuity point is always on the semantic boundaries
+    + compute intensity gradient for GT segmentation labels and predicted disparity (align edges)
+* two-step training, train the segementation subnet firstly and then joint training the whole
+    + For Scene Flow, have object-level segmentation GT, transform to segmentation labels
+    + For KITTI2015/12, the semantic segmentation first trained with KITTI15 (have GT for left images)
     
- <a href="https://arxiv.org/pdf/1910.00541.pdf">Real-Time Semantic Stereo Matching</a> 
-    * Both segmentation and disparity are fully computed only at the lowest resolution and progressively refined through the higher resolution residual stages(residual disparity), also applied in final refinement
-        + by building cost volume at the lowest reso, dmax=12 is enough(correspond to 192 at full reso)
-    * Synergy Disparity Refinement
-        + previous work(<a href="https://arxiv.org/pdf/1807.11699.pdf">SegStereo</a>) use concatenate the two embeddings into a hybrid volume
-        + perform a cascade of residual concatenations between semantic class probabilities and disparity volumes
-    * since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
+<a href="https://arxiv.org/pdf/1910.00541.pdf">Real-Time Semantic Stereo Matching</a> 
+* Both segmentation and disparity are fully computed only at the lowest resolution and progressively refined through the higher resolution residual stages(residual disparity), also applied in final refinement
+    + by building cost volume at the lowest reso, dmax=12 is enough(correspond to 192 at full reso)
+* Synergy Disparity Refinement
+    + previous work(<a href="https://arxiv.org/pdf/1807.11699.pdf">SegStereo</a>) use concatenate the two embeddings into a hybrid volume
+    + perform a cascade of residual concatenations between semantic class probabilities and disparity volumes
+* since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
         
 
  
