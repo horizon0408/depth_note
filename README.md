@@ -263,7 +263,15 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
         + For Scene Flow, have object-level segmentation GT, transform to segmentation labels
         + For KITTI2015/12, the semantic segmentation first trained with KITTI15 (have GT for left images)
     
-  
+ <a href="https://arxiv.org/pdf/1910.00541.pdf">Real-Time Semantic Stereo Matching</a> 
+    * Both segmentation and disparity are fully computed only at the lowest resolution and progressively refined through the higher resolution residual stages(residual disparity), also applied in final refinement
+        + by building cost volume at the lowest reso, dmax=12 is enough(correspond to 192 at full reso)
+    * Synergy Disparity Refinement
+        + previous work(<a href="https://arxiv.org/pdf/1807.11699.pdf">SegStereo</a>) use concatenate the two embeddings into a hybrid volume
+        + perform a cascade of residual concatenations between semantic class probabilities and disparity volumes
+    * since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
+        
+
  
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
