@@ -349,8 +349,25 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
         + use estimated transformation to get warped disparity of 2nd frame from 1st frame
         + then use the estimated forward flow to compute warped disparity of 2nd frame (suspect Eq.18 in Appendix B??)
 </details>
-        
+
+<a href="https://papers.nips.cc/paper/6502-surge-surface-regularized-geometry-estimation-from-a-single-image.pdf">SURGE: Surface Regularized Geometry Estimation from a Single Image</a>
+For single image depth estimation might depends on appearance information alone, so the surface geometry should help a lot here
+* a fourstream CNN, predict depths, surface normals, and likelihoods of planar region and planar boundary 
+* a DCRF integrate 4 predictions
+    +  the field of variables to be optimized are depths and normals
+
+<a href="https://arxiv.org/pdf/1804.06278.pdf">PlaneNet: Piece-wise Planar Reconstruction from a Single RGB Image</a>    
+* piece-wise planar depthmap reconstruction requires a structured geometry representation
+* directly produce a set of plane parameters and probabilistic plane segmentation masks 
+    + Plane parameters, predict a fixed number of planar surfaces(K) for each scene, depth can be inferred from paramteres
+        + don't know the number of planes, enable the corresponding probabilistic segmentation masks to be 0
+        + order-agnostic loss function based on the Chamfer distance
+    + Non-planar depthmap, regard as (K+1) th surface
+    + Segmentation masks, probabilistic segmentation masks
+        + joint train a <a href= "https://arxiv.org/pdf/1210.5644.pdf">DCRF</a> module
+
     
+
     
     
         
