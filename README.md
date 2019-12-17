@@ -288,6 +288,7 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
         
 
+<a href="https://arxiv.org/pdf/1904.09099.pdf">AMNet: Deep Atrous Multiscale Stereo Disparity Estimation Networks</a>
  
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
@@ -367,6 +368,7 @@ For single image depth estimation might depends on appearance information alone,
         + joint train a <a href= "https://arxiv.org/pdf/1210.5644.pdf">DCRF</a> module
 
     
+<a href="https://arxiv.org/pdf/1812.06264.pdf">Hierarchical Discrete Distribution Decomposition for Match Density Estimation</a>
 
     
     
