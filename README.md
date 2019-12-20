@@ -9,8 +9,9 @@
 
 ## Monocular depth estimation<a name="monocular"></a>
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
-
-<a href="https://arxiv.org/pdf/1908.03127.pdf">Enhancing self-supervised monocular depth estimation with traditional visual odometry (3DV 2019)</a>
+<details>
+<summary><a href="https://arxiv.org/pdf/1908.03127.pdf">Enhancing self-supervised monocular depth estimation with traditional visual odometry (3DV 2019)</a></summary>
+    
 * VO to obtained sparse 3D points
     + reproject 3D points onto both L/R camera planes to get sparse disparity map.
     + deploy two VO methods for training that exploit stereo and monocular sequences respectively
@@ -26,6 +27,8 @@
     + occlusion loss: minimize the sum of all disparities
     + inner loss: enforce DD to be consistent with SD (use L1 here)
     + outer loss: to preserve the info from VO, enforce final prediction d to be consistent with SD
+</details>
+
 
 <a href="https://research.dshin.org/iccv19/multi-layer-depth/">3D Scene Reconstruction with Multi-layer Depth and Epipolar Transformers (ICCV 2019)</a>
 
@@ -289,6 +292,25 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
         
 
 <a href="https://arxiv.org/pdf/1904.09099.pdf">AMNet: Deep Atrous Multiscale Stereo Disparity Estimation Networks</a>
+*  use an AM module after the D-ResNet backbone to form the feature extractor (similar purpose like SPP)
+    + a set of 3×3 dilated convolutions with increasing dilation factors (1,2,2,4,4,...,k/2,k/2,k), two 1×1 conv with dilation factor one are added at the end
+    + dilated convs provide denser features than pooling 
+    + increase the receptive field and get denser multiscale contextual w/o losing the spatial resolution
+    
+* Extended Cost Volume Aggregation
+    + unlike others only use single volume, it concatenate three different cost volumes (kind of encode several distance metric res here), final size will be H×W×(D+1)×4C 
+    + disparitylevel feature concatenation
+        + just concatenate L/R features lile GC-Net, PSMNet, get volume of size H×W×(D+1)×2C
+    + Disparity-level feature distance
+        + compute the point-wise absolute difference between L/R features at all disparity levels, get volume of size H×W×(D+1)×C
+    + Disparity-level depthwise correlation
+        + compute scalar product(like DispNetC) between L/R patches, get volume of size H×W×(D+1)×1
+        + to make the size comparable(now the channel is only 1 here), implement depthwise correlation, which means compute the patch correlation for each channel (t is 0 in practical, which means the size of patch is 1×1 actually, so it's just two number's product for every channel), which finally get a volume of size H×W×(D+1)×C.
+        
+* stacked AM modules to aggregate ECV (3D convs here because of the size of ECV)
+
+
+
  
 ## Multi-view depth estimation<a name="mvs"></a>
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
@@ -368,8 +390,13 @@ For single image depth estimation might depends on appearance information alone,
         + joint train a <a href= "https://arxiv.org/pdf/1210.5644.pdf">DCRF</a> module
 
     
+
 <a href="https://arxiv.org/pdf/1812.06264.pdf">Hierarchical Discrete Distribution Decomposition for Match Density Estimation</a>
 
+<a href="https://arxiv.org/pdf/1710.01020.pdf">Learning Affinity via Spatial Propagation Networks (SPN)</a>
+<a href="https://arxiv.org/pdf/1707.06484.pdf">Deep Layer Aggregation</a>
+<a href="https://arxiv.org/pdf/1706.05587.pdf">Rethinking Atrous Convolution for Semantic Image Segmentation</a>
+<a href="https://arxiv.org/pdf/1811.01791.pdf">Confidence Propagation through CNNs for Guided Sparse Depth Regression</a>
     
     
         
