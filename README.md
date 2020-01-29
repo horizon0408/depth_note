@@ -45,6 +45,9 @@ Learning Depth from Monocular Videos (ICCV 2019)</a>
 
 ## Stereo depth estimation<a name="stereo"></a>
 
+<a href="http://www.nlpr.ia.ac.cn/2011papers/gjhy/gh75.pdf">On Building an Accurate Stereo Matching System on Graphics Hardware</a>
+
+
 <a href = "http://vision.middlebury.edu/stereo/taxonomy-IJCV.pdf">A Taxonomy and Evaluation of Dense Two-Frame
 Stereo Correspondence Algorithms(2002)</a>
 * Traditional stereo methods generally perform 4 steps: matching cost computation; cost aggregation; disparity computation / optimization; disparity refinement.
