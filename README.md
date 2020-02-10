@@ -294,7 +294,8 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
         
 
-<a href="https://arxiv.org/pdf/1904.09099.pdf">AMNet: Deep Atrous Multiscale Stereo Disparity Estimation Networks</a>
+<details>
+<summary> <a href="https://arxiv.org/pdf/1904.09099.pdf">AMNet: Deep Atrous Multiscale Stereo Disparity Estimation Networks</a> </summary>
 *  use an AM module after the D-ResNet backbone to form the feature extractor (similar purpose like SPP)
     + a set of 3×3 dilated convolutions with increasing dilation factors (1,2,2,4,4,...,k/2,k/2,k), two 1×1 conv with dilation factor one are added at the end
     + dilated convs provide denser features than pooling 
@@ -311,7 +312,9 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
         + to make the size comparable(now the channel is only 1 here), implement depthwise correlation, which means compute the patch correlation for each channel (t is 0 in practical, which means the size of patch is 1×1 actually, so it's just two number's product for every channel), which finally get a volume of size H×W×(D+1)×C.
         
 * stacked AM modules to aggregate ECV (3D convs here because of the size of ECV)
+</details>
 
+<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_On_the_Over-Smoothing_Problem_of_CNN_Based_Disparity_Estimation_ICCV_2019_paper.pdf">On the Over-Smoothing Problem of CNN Based Disparity Estimation (ICCV 2019)</a> 
 
 
  
