@@ -1,11 +1,11 @@
 # Depth estimation research papers
-12.2.2019: add iccv19 to-read list
+25.05.2021: add depth completion
 
 # Table of Contents
 1. [Monocular depth estimation](#monocular)
 2. [Stereo depth estimation](#stereo)
 3. [Multi-view depth estimation](#mvs)
-
+4. [Depth completion](#completion)
 
 ## Monocular depth estimation<a name="monocular"></a>
 <a href="http://fastdepth.mit.edu/">FastDepth: Fast Monocular Depth Estimation on Embedded Systems (ICRA 2019)</a>
@@ -232,7 +232,10 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + to avoid replace a lot zero values, use a Gaussian function.
     + the Gaussian modulation applied after concatenating L/R features (2F, D, H, W)
    
- <a href = "https://arxiv.org/pdf/1810.05424.pdf">Real-time self-adaptive deep stereo (CVPR)</a> <a href='https://github.com/CVLAB-Unibo/Real-time-self-adaptive-deep-stereo'>[code]</a>
+   
+<details>
+ <summary><a href = "https://arxiv.org/pdf/1810.05424.pdf">Real-time self-adaptive deep stereo (CVPR)</a> <a href='https://github.com/CVLAB-Unibo/Real-time-self-adaptive-deep-stereo'>[code]</a></summary>
+    
  * a fast modular architecture
     + at the lowest resoltion (F6), forward features from left to right into correlation layer(DispNetC here), decoder D6 get disparity map at lowest resolution.
     + upsample D6 to level 5, used for warping right features to left before computing correlation.
@@ -252,8 +255,11 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
     + the loss is based on photometric consistency loss, combination of L1 and SSIM
     
   <a href = "https://arxiv.org/pdf/1909.05845.pdf">DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch(ICCV 19)</a> 
-  
-<a href = "https://arxiv.org/pdf/1807.11699.pdf">SegStereo: Exploiting Semantic Information for Disparity Estimation (ECCV18)</a> 
+</details>
+
+<details>
+<summary><a href = "https://arxiv.org/pdf/1807.11699.pdf">SegStereo: Exploiting Semantic Information for Disparity Estimation (ECCV18)</a></summary>
+    
 * Model Specification
     + shallow part of ResNet-50 model to extract image features
     + PSPNet-50 as segmentation net
@@ -267,9 +273,11 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * framework is appliable for both supervised/unsupervised training
     + the unsupervised loss introduce a mask indicator to avoid outlier, setting a threshold for resulting photometric diff
     + chabonier function for spatial smoothness penalty 
-
-
-<a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> 
+</details>
+    
+<details>
+<summary><a href = "http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Semantic_Stereo_Matching_With_Pyramid_Cost_Volumes_ICCV_2019_paper.pdf">Semantic Stereo Matching with Pyramid Cost Volumes (ICCV 19)</a> </summary>
+    
 * pyramid cost volumes for both semantic and spatial info 
     + Unlike PSMNet use single cost volume with multiscale features, it construct multilevel cost volumes directly (btw the figure for spatial cost volume via spatial pooling is clear) (However, should lead to much higher complexity?)
     + semantic cost volume follows <a href="https://arxiv.org/pdf/1612.01105.pdf">PSPNet</a>
@@ -284,15 +292,18 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * two-step training, train the segementation subnet firstly and then joint training the whole
     + For Scene Flow, have object-level segmentation GT, transform to segmentation labels
     + For KITTI2015/12, the semantic segmentation first trained with KITTI15 (have GT for left images)
+</details>
+
+<details>
+<summary><a href="https://arxiv.org/pdf/1910.00541.pdf">Real-Time Semantic Stereo Matching</a> </summary>
     
-<a href="https://arxiv.org/pdf/1910.00541.pdf">Real-Time Semantic Stereo Matching</a> 
 * Both segmentation and disparity are fully computed only at the lowest resolution and progressively refined through the higher resolution residual stages(residual disparity), also applied in final refinement
     + by building cost volume at the lowest reso, dmax=12 is enough(correspond to 192 at full reso)
 * Synergy Disparity Refinement
     + previous work(<a href="https://arxiv.org/pdf/1807.11699.pdf">SegStereo</a>) use concatenate the two embeddings into a hybrid volume
     + perform a cascade of residual concatenations between semantic class probabilities and disparity volumes
 * since only GT instance segmentation in SceneFlow, initialize network on the CityScapes(disparity maps obtained via SGM, noisy)
-        
+</details>
 
 <details>
 <summary> <a href="https://arxiv.org/pdf/1904.09099.pdf">AMNet: Deep Atrous Multiscale Stereo Disparity Estimation Networks</a> </summary>
@@ -319,6 +330,11 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 
  
 ## Multi-view depth estimation<a name="mvs"></a>
+<a href="https://arxiv.org/pdf/2012.02177.pdf">DeepVideoMVS: Multi-View Stereo on Video with Recurrent Spatio-Temporal Fusion (CVPR 2021)</a> <a href = "https://github.com/ardaduz/deep-video-mvs">[code]</a>
+* use ConvLSTM and a hidden state propagation scheme to achieve temporal consistency
+* introduce inverse warping while propagating the hidden state, make the learning problem easier for the ConvLSTM cell
+
+
 <a href="https://arxiv.org/pdf/1901.02571.pdf">Neural RGB→D Sensing: Depth and Uncertainty from a Video Camera (CVPR 2019)</a>  <a href = "https://github.com/NVlabs/neuralrgbd">[code]</a>
 * use D-Net to learn the depth probability volume (DPV)
     + pre-define dmin, dmax and neighbour window size to learn DPV
@@ -334,6 +350,17 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 <a href="https://arxiv.org/pdf/1908.04422.pdf">Point-Based Multi-View Stereo Network</a>
 
 <a href="https://arxiv.org/pdf/1908.03706.pdf">Exploiting temporal consistency for real-time video depth estimation</a>
+
+
+## Depth completion <a name="completion"></a>
+
+<a href="https://arxiv.org/pdf/1811.01791.pdf">Confidence Propagation through CNNs for Guided Sparse Depth Regression</a>
+
+<a href="https://arxiv.org/pdf/1709.07492.pdf">Sparse-to-dense: Depth prediction from sparse depth samples and a single image (ICRA 2018)</a>
+* During training, the input sparse depth is sampled randomly from the ground truth, takes both a sparse set of depth samples and RGB images as input
+* it shows results for application: Dense Map from Visual Odometry Features
+
+<a href="https://arxiv.org/pdf/1804.02771.pdf">Estimating depth from rgb and sparse sensing (ECCV 2018)</a>
 
 ## others
 <details>
@@ -379,13 +406,19 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
         + then use the estimated forward flow to compute warped disparity of 2nd frame (suspect Eq.18 in Appendix B??)
 </details>
 
-<a href="https://papers.nips.cc/paper/6502-surge-surface-regularized-geometry-estimation-from-a-single-image.pdf">SURGE: Surface Regularized Geometry Estimation from a Single Image</a>
+<details>
+<summary><a href="https://papers.nips.cc/paper/6502-surge-surface-regularized-geometry-estimation-from-a-single-image.pdf">SURGE: Surface Regularized Geometry Estimation from a Single Image</a></summary>
+    
 For single image depth estimation might depends on appearance information alone, so the surface geometry should help a lot here
 * a fourstream CNN, predict depths, surface normals, and likelihoods of planar region and planar boundary 
 * a DCRF integrate 4 predictions
     +  the field of variables to be optimized are depths and normals
 
-<a href="https://arxiv.org/pdf/1804.06278.pdf">PlaneNet: Piece-wise Planar Reconstruction from a Single RGB Image</a>    
+</details>
+
+<details>
+<summary><a href="https://arxiv.org/pdf/1804.06278.pdf">PlaneNet: Piece-wise Planar Reconstruction from a Single RGB Image</a></summary>
+    
 * piece-wise planar depthmap reconstruction requires a structured geometry representation
 * directly produce a set of plane parameters and probabilistic plane segmentation masks 
     + Plane parameters, predict a fixed number of planar surfaces(K) for each scene, depth can be inferred from paramteres
@@ -395,14 +428,18 @@ For single image depth estimation might depends on appearance information alone,
     + Segmentation masks, probabilistic segmentation masks
         + joint train a <a href= "https://arxiv.org/pdf/1210.5644.pdf">DCRF</a> module
 
+</details>
     
 
 <a href="https://arxiv.org/pdf/1812.06264.pdf">Hierarchical Discrete Distribution Decomposition for Match Density Estimation</a>
 
 <a href="https://arxiv.org/pdf/1710.01020.pdf">Learning Affinity via Spatial Propagation Networks (SPN)</a>
+
 <a href="https://arxiv.org/pdf/1707.06484.pdf">Deep Layer Aggregation</a>
+
 <a href="https://arxiv.org/pdf/1706.05587.pdf">Rethinking Atrous Convolution for Semantic Image Segmentation</a>
-<a href="https://arxiv.org/pdf/1811.01791.pdf">Confidence Propagation through CNNs for Guided Sparse Depth Regression</a>
+
+
     
     
         
