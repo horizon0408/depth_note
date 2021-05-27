@@ -361,6 +361,37 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 * it shows results for application: Dense Map from Visual Odometry Features
 
 <a href="https://arxiv.org/pdf/1804.02771.pdf">Estimating depth from rgb and sparse sensing (ECCV 2018)</a>
+* introduce new way of parameterizing sparse depth inputs, rather than input the sparse depth directly
+    + a NN fill of the sparse depth map S1, then the densification can be regarded as a residual prediction w.r.t. S1, which can make learning easier
+    + the Euclidean Distance Transform of the mask S2, which can provide prior on the residual magnitudes.
+* include the sparse depth map S1 at every DenseNet module
+
+<a href="https://arxiv.org/pdf/1808.00150.pdf">Depth Estimation via Affinity Learned with Convolutional Spatial Propagation Network (ECCV 2018)</a>
+
+
+<a href="https://zswang666.github.io/PnP-Depth-Project-Page/">Plug-and-Play: Improve Depth Prediction via Sparse Data Propagation (ICRA 2019)</a>
+* requires no additional training, given a pre-trained depth prediction model, updates intermediate feature map
+* update the intermediate feature map iteratively based on the gradient computed from sparse points
+
+
+<a href="https://arxiv.org/pdf/1905.02744.pdf">LiStereo: Generate Dense Depth Maps from LIDAR and Stereo Imagery</a>
+
+<a href="https://arxiv.org/pdf/2003.08933.pdf"> DELTAS: Depth Estimation by Learning Triangulation And densification of Sparse points</a>
+* instead of using Plane Sweep, firstly detecting and evaluating descriptors for interest points
+    + SuperPoint-like network with detector and descriptor head
+
+* then learning to match and triangulate a small set of interest points
+    + only search along the epipolar line 
+    + use bilinear sampling to obtain the descriptors at the desired points 
+* densifying this sparse set of 3D points
+
+
+<a href="https://par.nsf.gov/servlets/purl/10169232">Sparse-to-Dense Depth Completion Revisited: Sampling Strategy and Graph Construction</a>
+
+<a href="https://april.zju.edu.cn/wp-content/papercite-data/pdf/liu2021learningsk.pdf">Learning Steering Kernels for Guided Depth Completion</a>
+
+
+
 
 ## others
 <details>
