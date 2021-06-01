@@ -394,6 +394,7 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 
 
 ## others
+<a hred="https://arxiv.org/pdf/2012.05901.pdf">Robust Consistent Video Depth Estimation </a>
 <details>
 <summary> <a href = "http://www.cvlibs.net/publications/Janai2018ECCV.pdf"> Unsupervised Learning of Multi-Frame Optical Flow with Occlusions (ECCV 2018)</a> </summary>
     
