@@ -392,6 +392,8 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 
 <a href="https://arxiv.org/pdf/2012.12402.pdf">Learning Joint 2D-3D Representations for Depth Completion (ICCV 2019)</a>
 
+<a href="https://zswang666.github.io/Stereo-LiDAR-CCVNorm-Project-Page/">3D LiDAR and Stereo Fusion using Stereo Matching Network with Conditional Cost Volume Normalization</a>
+
 
 ## others
 <a hred="https://arxiv.org/pdf/2012.05901.pdf">Robust Consistent Video Depth Estimation </a>
