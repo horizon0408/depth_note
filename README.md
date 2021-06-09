@@ -390,7 +390,7 @@ Code notes: Looks rely on CUDA9.2: after download cuda9.2 toolkit and export LD_
 
 <a href="https://april.zju.edu.cn/wp-content/papercite-data/pdf/liu2021learningsk.pdf">Learning Steering Kernels for Guided Depth Completion</a>
 
-
+<a href="https://arxiv.org/pdf/2012.12402.pdf">Learning Joint 2D-3D Representations for Depth Completion (ICCV 2019)</a>
 
 
 ## others
